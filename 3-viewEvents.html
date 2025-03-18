@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>View Events</title>
+  <link rel="stylesheet" href="hstyles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet" />
+  <style>
+    /* Apply Background Blur */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      position: relative;
+      background: url("Images/bg2.jpg") no-repeat center fixed;
+      background-size: cover;
+      overflow-x: hidden;
+      width: 100vw;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      /* Dark overlay */
+      backdrop-filter: blur(0px);
+      /* Blur effect */
+      z-index: -1;
+    }
+
+    .events-container h2 {
+      font-family: "Allura", cursive;
+      font-weight: 200;
+      font-size: 2.5rem;
+    }
+
+    /* Blur effect for Event Section */
+    .events-container {
+      padding: 90px;
+      max-width: 1000px;
+      margin: 20px auto;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      color: white;
+    }
+
+    /* Table Styling */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: rgba(255, 255, 255, 0.3);
+      /* Light glass effect */
+      backdrop-filter: blur(8px);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th,
+    td {
+      padding: 12px;
+      text-align: left;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    th {
+      font-family: "Allura", cursive;
+      font-weight: 200;
+      font-size: 2rem;
+      background: rgba(208, 193, 153, 0.8);
+      color: white;
+    }
+    td{
+      font-family: "Allura", cursive;
+      font-weight: 200;
+      font-size: 1.2rem;
+    }
+    tr:nth-child(even) {
+      background: rgba(255, 255, 255, 0.2);
+      
+    }
+
+    /* Button Styles */
+    button {
+      padding: 5px 10px;
+      font-family: "Allura", cursive;
+      font-weight: 200;
+      font-size: 1.2rem;
+      background: #c6c4c4;
+      color: rgb(0, 0, 0);
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #d32f2f;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .events-container {
+        padding: 20px;
+      }
+
+      table {
+        font-size: 14px;
+      }
+    }
+
+    .footer-container {
+
+      font-size: 1.2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      padding: 20px;
+      background: linear-gradient(to bottom, rgba(20, 20, 20, 0.2), rgba(10, 10, 10, 0.2));
+    }
+  </style>
+</head>
+
+<body style="display: block; margin: 0px 0 0 0">
+  <!-- Header Section -->
+  <header>
+    <nav>
+      <ul class="navbar">
+        <li><a href="1-index.html">Home</a></li>
+        <li><a href="2-createEvent.html">Create event</a></li>
+        <li><a href="3-viewEvents.html">View events</a></li>
+        <li><a href="4-budgetPlanner.html">Budget planner</a></li>
+        <li><a href="5-testimonials.html">Testimonals</a></li>
+        <li><a href="6-contactUs.html">Contact us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- View Events Table Section -->
+  <div class="events-container">
+    <h2>Scheduled Events</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Event Name</th>
+          <th>Date</th>
+          <th>Venue</th>
+          <th>Guests</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="eventsTable">
+        <!-- Events will be dynamically loaded here -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Footer Section -->
+  <footer>
+    <div class="footer-container">
+      <!-- Top row with Talk To Expert, Address, and Email -->
+      <div class="footer-top">
+        <div class="footer-section">
+          <h3>Talk To Expert</h3>
+          <p>+91-9572220113</p>
+        </div>
+        <div class="footer-section">
+          <h3>Our Address</h3>
+          <p>
+            Balaji Bhavan Opp Stanza Complex, Liberty Road, Gagan Mahal,
+            Hyderabad, Telangana 500029
+          </p>
+        </div>
+        <div class="footer-section">
+          <h3>Email Us</h3>
+          <p>manager@sehari.in</p>
+        </div>
+      </div>
+
+      <!-- About Our Events Section -->
+      <div class="footer-section about-events">
+        <h3>About Our Events</h3>
+        <p>
+          We've delivered fabulous event experiences over the last two decades
+          and are now poised to chart out a whole new growth story. We hosted
+          for reputed company.
+        </p>
+      </div>
+
+      <!-- Quick Links Section -->
+      <div class="footer-center">
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul class="styled-list">
+            <li>🔗 <a href="index.html">Home</a></li>
+            <li>🔗 <a href="create-event.html">Create Event</a></li>
+            <li>🔗 <a href="view-events.html">View Events</a></li>
+            <li>🔗 <a href="budget-planner.html">Budget Planner</a></li>
+            <li>🔗 <a href="contact-us.html">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>
+          &copy; 2025 SEHARI | All Rights Reserved. Developed by Sehari Group.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript for Table and Event Deletion -->
+  <script>
+    const events = JSON.parse(localStorage.getItem("events")) || [];
+    const eventsTable = document.getElementById("eventsTable");
+
+    if (events.length === 0) {
+      eventsTable.innerHTML =
+        '<tr><td colspan="5" style="text-align: center;">No events found.</td></tr>';
+    } else {
+      events.forEach((event, index) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+                    <td>${event.name}</td>
+                    <td>${event.date}</td>
+                    <td>${event.venue}</td>
+                    <td>${event.guests}</td>
+                    <td><button onclick="deleteEvent(${index})">Delete</button></td>
+                `;
+        eventsTable.appendChild(row);
+      });
+    }
+
+    function deleteEvent(index) {
+      const updatedEvents = events.filter((_, i) => i !== index);
+      localStorage.setItem("events", JSON.stringify(updatedEvents));
+      location.reload();
+    }
+  </script>
+</body>
+
+</html>
