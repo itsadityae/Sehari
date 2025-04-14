@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login - Sehari</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="hstyles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet" />
+  <style>
+    /* Styles from the original page */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      position: relative;
+      background: url("Images/bg6.jpg") no-repeat center fixed;
+      max-width: 100vw;
+      background-size: cover;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(0px);
+      z-index: -1;
+    }
+
+    /* Navigation bar styles */
+    header {
+      width: 100%;
+      /* position: fixed; */
+      top: 0;
+      z-index: 100;
+    }
+
+
+
+    /* Login box styles */
+    .login-container {
+      max-width: 450px;
+      margin: 80px auto;
+      padding: 30px;
+      background: linear-gradient(rgba(241, 239, 201, 0.5), rgba(255, 255, 255, 0.4)),
+        url("eveform2.jpg") center/cover no-repeat;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeIn 0.8s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .login-container h2 {
+      font-family: "Allura", cursive;
+      font-size: 2.5rem;
+      color: #000000;
+      margin-bottom: 25px;
+      text-align: center;
+      font-weight: 200;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    label {
+      font-weight: 200;
+      display: block;
+      margin-bottom: 8px;
+      color: #000000;
+      font-size: 1.65rem;
+      letter-spacing: 0.5px;
+      font-family: "Allura", cursive;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 15px;
+      font-family: "Allura", cursive;
+      font-size: 24px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      transition: all 0.4s ease;
+      box-sizing: border-box;
+      background-color: rgba(255, 255, 255, 0.8);
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+      margin: 10px 0;
+    }
+
+    input:focus {
+      border-color: #fbc3f5;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(251, 195, 245, 0.3);
+      background-color: #fff;
+    }
+
+    .login-btn {
+      font-family: "Allura", cursive;
+      font-weight: 200;
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(to right, #000000, #000000);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.39rem;
+      /* font-weight: 600; */
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: block;
+      margin: 30px 0 10px;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 10px rgba(255, 253, 255, 0.4);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .login-btn:hover {
+      background: linear-gradient(to right, #150d0d, #100f0f);
+      transform: translateY(-2px);
+      font-size: 1.5rem;
+      box-shadow: 0 6px 15px rgba(255, 255, 255, 0.5);
+    }
+
+    .login-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 5px rgba(251, 195, 245, 0.5);
+    }
+
+    #error {
+      color: #ff0000;
+      font-family: Arial, sans-serif;
+      font-size: 1rem;
+      margin-top: 15px;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Footer styles */
+    .footer-container {
+
+      font-size: 1.2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      padding: 20px;
+      background: linear-gradient(to bottom, rgba(20, 20, 20, 0.2), rgba(10, 10, 10, 0.2));
+    }
+
+    /* .styled-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .styled-list li {
+      margin: 8px 0;
+    }
+
+    .styled-list a {
+      color: #ffffff;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .styled-list a:hover {
+      color: #ff0000;
+    } */
+
+
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .login-container {
+        max-width: 90%;
+        padding: 20px;
+        margin: 60px auto;
+      }
+
+      .navbar {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .navbar li {
+        padding: 5px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header Section -->
+  <header>
+    <nav>
+      <ul class="navbar">
+        <li><a href="1-index.html">Home</a></li>
+        <li><a href="2-createEvent.html">Create event</a></li>
+        <li><a href="3-viewEvents.html">View events</a></li>
+        <li><a href="5-testimonials.html">Testimonals</a></li>
+        <li><a href="6-contactUs.html">Contact us</a></li>
+        <li><a href="x-adminLogin.html">Admin</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Login Container -->
+  <section class="login-container">
+    <h2>Admin Login</h2>
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" id="username" placeholder="Enter your username" required />
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Enter your password" required />
+    </div>
+
+    <button class="login-btn" onclick="login()">Login</button>
+    <p id="error"></p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <!-- Top row with Talk To Expert, Address, and Email -->
+      <div class="footer-top">
+        <div class="footer-section">
+          <h3>Talk To Expert</h3>
+          <p>+91-9572220113</p>
+        </div>
+        <div class="footer-section">
+          <h3>Our Address</h3>
+          <p>Balaji Bhavan Opp Stanza Complex, Liberty Road, Gagan Mahal, Hyderabad, Telangana 500029</p>
+        </div>
+        <div class="footer-section">
+          <h3>Email Us</h3>
+          <p>manager@sehari.in</p>
+        </div>
+      </div>
+
+      <!-- About Our Events Section -->
+      <div class="footer-section about-events">
+        <h3>About Our Events</h3>
+        <p>We've delivered fabulous event experiences over the last two decades and are now poised to chart out
+          a whole
+          new growth story. We hosted for reputed company.</p>
+      </div>
+
+      <!-- Quick Links and Our Services aligned in center -->
+      <div class="footer-center">
+        <!-- Quick Links Section -->
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul class="styled-list">
+            <li>🔗 <a href="#">Home</a></li>
+            <li>🔗 <a href="2-createEvent.html">Create Event</a></li>
+            <li>🔗 <a href="3-viewEvents.html">View Events</a></li>
+            <li>🔗 <a href="4-budgetPlanner.html">Budget Planner</a></li>
+            <li>🔗 <a href="6-contactUs.html">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 SEHARI | All Rights Reserved. Developed by Sehari Group.</p>
+      </div>
+    </div>
+  </footer>
+
+
+
+  <script>
+    function login() {
+      const u = document.getElementById("username").value;
+      const p = document.getElementById("password").value;
+
+      if (u === "Aditya" && p === "Sehari") {
+        localStorage.setItem("isAdmin", "true");
+        window.location.href = "3-viewEvents.html";
+      } else {
+        document.getElementById("error").innerText = "Invalid credentials! Please try again.";
+      }
+    }
+  </script>
+</body>
+
+</html>

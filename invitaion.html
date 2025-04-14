@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Invitation Templates</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Playfair Display', serif;
+      background: linear-gradient(135deg, #f0f4f7, #ffffff);
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 20px;
+      margin-top: 40px;
+      color: #444;
+    }
+
+    p {
+      margin-top: 0;
+      font-size: 14px;
+    }
+
+    .template-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+      margin-bottom: 40px;
+    }
+
+    .template {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      width: 200px;
+      cursor: pointer;
+      overflow: hidden;
+      text-align: center;
+      padding: 15px;
+      position: relative;
+    }
+
+    .template:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    }
+
+    .template img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .template p {
+      font-size: 13px;
+      margin-top: 8px;
+      color: #666;
+    }
+
+    .favorite {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      font-size: 18px;
+      color: #ccc;
+      cursor: pointer;
+    }
+
+    .favorite.active {
+      color: red;
+    }
+
+    .navbar {
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 15px 20px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    footer {
+      margin-top: 50px;
+      font-size: 13px;
+      color: #777;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      .template {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <h1>🎉 Invitation Templates Gallery</h1>
+    <p>Choose from wedding, birthday, anniversary, and engagement designs</p>
+  </div>
+
+  <!-- Wedding Templates -->
+  <h2>💍 Wedding Invitations</h2>
+  <div class="template-container" id="wedding-templates"></div>
+
+  <!-- Birthday Templates -->
+  <h2>🎂 Birthday Invitations</h2>
+  <div class="template-container" id="birthday-templates"></div>
+
+  <!-- Anniversary Templates -->
+  <h2>🎉 Anniversary Invitations</h2>
+  <div class="template-container" id="anniversary-templates"></div>
+
+  <!-- Engagement Templates -->
+  <h2>💑 Engagement Invitations</h2>
+  <div class="template-container" id="engagement-templates"></div>
+
+  <footer>Made with ❤ by You</footer>
+
+  <script>
+    const apiKey = 'XHwjgXdgrm69xNcnVu7mPJp3Hl8iBbWwG7kkZsasCkXJbGcp1RWaGioO'; // Replace with your actual API key
+
+    const endpoints = {
+      wedding: 'https://api.pexels.com/v1/search?query=wedding%20invitation&per_page=12&page=1',
+      birthday: 'https://api.pexels.com/v1/search?query=birthday%20invitation&per_page=12&page=1',
+      anniversary: 'https://api.pexels.com/v1/search?query=anniversary%20invitation&per_page=12&page=1',
+      engagement: 'https://api.pexels.com/v1/search?query=engagement%20invitation&per_page=12&page=1'
+    };
+
+    async function fetchCategory(url) {
+      const response = await fetch(url, {
+        headers: { 'Authorization': apiKey }
+      });
+      const data = await response.json();
+      return shuffleArray(data.photos);
+    }
+
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    function renderTemplates(templates, containerId) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = '';
+      templates.forEach(template => {
+        const templateDiv = document.createElement('div');
+        templateDiv.classList.add('template');
+        templateDiv.innerHTML = ` 
+          <button class="favorite" onclick="toggleFavorite(this)">&#10084;</button>
+          <img src="${template.src.medium}" alt="${template.alt}" onclick="openModal('${template.src.large2x}')">
+          <p>Photographer: ${template.photographer}</p>
+        `;
+        container.appendChild(templateDiv);
+      });
+    }
+
+    function toggleFavorite(btn) {
+      btn.classList.toggle('active');
+    }
+
+    function openModal(imgSrc) {
+      const modal = document.createElement('div');
+      modal.style.position = 'fixed';
+      modal.style.top = '0';
+      modal.style.left = '0';
+      modal.style.width = '100%';
+      modal.style.height = '100%';
+      modal.style.backgroundColor = 'rgba(0,0,0,0.8)';
+      modal.style.display = 'flex';
+      modal.style.alignItems = 'center';
+      modal.style.justifyContent = 'center';
+      modal.innerHTML = `
+        <img src="${imgSrc}" style="max-width: 90%; max-height: 90%;">
+        <button onclick="closeModal()">Close</button>
+      `;
+      document.body.appendChild(modal);
+    }
+
+    function closeModal() {
+      document.querySelector('div[style*="position: fixed"]').remove();
+    }
+
+    async function loadTemplates() {
+      const weddingTemplates = await fetchCategory(endpoints.wedding);
+      const birthdayTemplates = await fetchCategory(endpoints.birthday);
+      const anniversaryTemplates = await fetchCategory(endpoints.anniversary);
+      const engagementTemplates = await fetchCategory(endpoints.engagement);
+
+      renderTemplates(weddingTemplates, 'wedding-templates');
+      renderTemplates(birthdayTemplates, 'birthday-templates');
+      renderTemplates(anniversaryTemplates, 'anniversary-templates');
+      renderTemplates(engagementTemplates, 'engagement-templates');
+    }
+
+    loadTemplates();
+  </script>
+
+</body>
+</html>
+
+idi invitation templates okasari idi chudu
